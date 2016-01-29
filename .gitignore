@@ -1,0 +1,15 @@
+target
+*.iml
+*.ipr
+*.iws
+*.ids
+/out/
+/data/
+.idea
+.gradle
+gradle.bat
+version.properties
+build
+classes
+atlassian-ide-plugin.xml
+version.properties
