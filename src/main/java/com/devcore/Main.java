@@ -1,7 +1,9 @@
 package com.devcore;
 
-import com.devcore.entity.Family;
-import com.devcore.entity.FamilyDao;
+import com.devcore.dao.UserAccountDao;
+import com.devcore.entity.UserAccount;
+import com.devcore.service.UserAccountService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 /**
@@ -9,13 +11,18 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
  */
 public class Main {
 
-  public static  void main(String[] args){
 
+  public static void main(String[] args) {
     ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("spring.xml");
-//    FamilyDao dao = context.getBean(FamilyDao.class);
-//
-//    Family family = new Family();
-//    family.setFamilyMembersAmount(5);
-//    dao.save(family);
+    context.refresh();
+
+//    UserAccountService userAccountService = (UserAccountService) context.getBean("userAccountService");
+//    userAccountService.createUser("Evgeny", "ajsgjdsafHJGsd");
+
+    UserAccountDao userAccountDao = (UserAccountDao) context.getBean("userAccountDao");
+    System.out.println(userAccountDao.loadUserByUserName("Evgeny").toString());
+    Long id = userAccountDao.countAll();
+
   }
+
 }

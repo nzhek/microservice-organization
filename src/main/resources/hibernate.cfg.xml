@@ -1,16 +1,16 @@
 <!DOCTYPE hibernate-configuration PUBLIC
   "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
   "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
-  
-  <hibernate-configuration>
+
+<hibernate-configuration>
   <session-factory>
-    <property name="connection.driver_class">org.postgresql.Driver</property>
-    <property name="connection.url">jdbc:postgresql://localhost:5432/devcore</property>
-    <property name="connection.username">postgres</property>
-    <property name="connection.password">postgres</property>
-    <property name="connection.pool_size">1</property>
+    <property name="hibernate.connection.datasource">org.postgresql.Driver</property>
+    <property name="hibernate.connection.url">jdbc:postgresql://localhost:5432/devcore</property>
+    <property name="hibernate.connection.username">postgres</property>
+    <property name="hibernate.connection.password">postgres</property>
+    <property name="hibernate.connection.pool_size">1</property>
     <property name="hibernate.cache.use_query_cache">true</property>
-    <property name= "hibernate.cache.provider_class">
+    <property name="hibernate.cache.provider_class">
       org.hibernate.cache.NoCacheRegionFactoryAvailableException
     </property>
     <property name="dialect">org.hibernate.dialect.PostgreSQL94Dialect</property>
