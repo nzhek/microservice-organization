@@ -6,6 +6,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 import java.util.Date;
 
 
@@ -13,12 +15,14 @@ import java.util.Date;
  * Класс сущность Пользователь
  */
 @Entity
-public class UserAccount {
+public class UserAccount implements Serializable{
 
   @Id
   @GeneratedValue(strategy = GenerationType.SEQUENCE)
   private Long id;
+  @NotNull
   private String username;
+  @NotNull
   private String password;
   private String email;
   private String phone;

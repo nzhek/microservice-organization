@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.List;
 
 @Service("userAccountService")
 public class UserAccountServiceImpl implements UserAccountService {
@@ -20,5 +21,24 @@ public class UserAccountServiceImpl implements UserAccountService {
     userAccount.setPassword(password);
     userAccount.setCreateDate(new Date());
     userAccountDao.create(userAccount);
+  }
+
+  @Override
+  public void getUsers() {
+    List<UserAccount> userAccounts = userAccountDao.getAll();
+    for (UserAccount item : userAccounts) {
+      System.out.println(
+        item.getId() +
+          " | " + item.getCreateDate() +
+          " | " + item.getUsername() +
+          " | " + item.getPassword() +
+          " | " + item.getPhone() +
+          " | " + item.getEmail());
+    }
+  }
+
+  @Override
+  public UserAccount getUser(String name) {
+    return userAccountDao.loadUserByUserName(name);
   }
 }
