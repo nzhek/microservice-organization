@@ -13,8 +13,8 @@
   <context:property-placeholder location="classpath:database.properties"/>
   <context:annotation-config/>
 
-  <context:component-scan base-package="com.devcore.dao"/>
   <context:component-scan base-package="com.devcore.entity"/>
+  <context:component-scan base-package="com.devcore.dao"/>
   <context:component-scan base-package="com.devcore.service"/>
 
   <bean class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor"/>
@@ -27,12 +27,17 @@
   />
 
   <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean"
-        p:persistenceXmlLocation="classpath:/persistence.xml"
-        p:persistenceUnitName="persistenceUnit"
+        p:persistenceXmlLocation="classpath:persistence.xml"
+        p:persistenceUnitName="firstPersistenceUnit"
+        p:packagesToScan="com.devcore.entity"
         p:dataSource-ref="dataSource"
+        p:jpaVendorAdapter-ref="jpaVendorAdapter"
   />
 
-  <bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean"
+  <bean id="jpaVendorAdapter" class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter"/>
+
+  <bean id="sessionFactory" class="org.springframework.orm.hibernate5.LocalSessionFactoryBean"
+        p:packagesToScan="com.devcore.entity"
         p:dataSource-ref="dataSource"/>
 
   <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
