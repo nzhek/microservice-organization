@@ -27,4 +27,9 @@ public class RoomForMessagesServiceImpl implements RoomForMessagesService {
 
     roomForMessagesDao.create(roomForMessages);
   }
+
+  @Override
+  public RoomForMessages findById(Long id) {
+    return roomForMessagesDao.find(id);
+  }
 }

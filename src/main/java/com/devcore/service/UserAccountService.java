@@ -11,5 +11,8 @@ public interface UserAccountService {
   void getUsers();
 
   @Transactional
-  UserAccount getUser(String name);
+  UserAccount findUserByName(String name);
+
+  @Transactional
+  UserAccount findById(Long id);
 }
