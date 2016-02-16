@@ -5,7 +5,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
-import java.util.Map;
+import java.util.List;
 
 public abstract class GenericDaoImpl<T> implements GenericDao<T> {
 
@@ -22,8 +22,7 @@ public abstract class GenericDaoImpl<T> implements GenericDao<T> {
 
   @Override
   public long countAll() {
-    final StringBuffer queryString = new StringBuffer(
-      "SELECT count(o) from ");
+    final StringBuffer queryString = new StringBuffer("SELECT count(o) from ");
     queryString.append(type.getSimpleName()).append(" o ");
     final Query query = entityManager.createQuery(queryString.toString());
     return (Long) query.getSingleResult();
@@ -48,5 +47,17 @@ public abstract class GenericDaoImpl<T> implements GenericDao<T> {
   @Override
   public T update(T t) {
     return this.entityManager.merge(t);
+  }
+
+  @Override
+  public List<T> getAll() {
+    final StringBuffer queryString = new StringBuffer("select u from ");
+    queryString.append(type.getSimpleName()).append(" u ");
+    final Query query = entityManager.createQuery(queryString.toString());
+    List<T> list = query.getResultList();
+    if (list != null){
+      return list;
+    }
+    return null;
   }
 }
