@@ -1,9 +1,12 @@
 package com.devcore;
 
+import com.devcore.entity.Messages;
 import com.devcore.service.MessagesService;
 import com.devcore.service.RoomForMessagesService;
 import com.devcore.service.UserAccountService;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+import java.util.List;
 
 /**
  * Точка входа
@@ -18,7 +21,6 @@ public class Main {
     userAccountService.createUser("Vasya", "ajsgjdsafHJGsd");
     userAccountService.createUser("Boris", "ajsgjdkjgJGsd");
     userAccountService.createUser("Georgy", "KHGJ546dsafHJGsd");
-    //userAccountService.getUsers();
 
     RoomForMessagesService roomForMessagesService = (RoomForMessagesService) context.getBean("roomForMessagesService");
     roomForMessagesService.createRoom("room one", "room descr descr descr", userAccountService.findUserByName("Vasya"));
@@ -28,13 +30,22 @@ public class Main {
 
     MessagesService messagesService = (MessagesService) context.getBean("messagesService");
     if (roomForMessagesService.findById(6L) != null) {
-      messagesService.createMessage("lalala tralala", userAccountService.findUserByName("Vasya"), roomForMessagesService.findById(6L));
+      messagesService.createMessage("lalala tralala 1111", userAccountService.findUserByName("Vasya"), roomForMessagesService.findById(6L));
+      messagesService.createMessage("lalala tralala 2222", userAccountService.findUserByName("Vasya"), roomForMessagesService.findById(6L));
+      messagesService.createMessage("lalala tralala 333112", userAccountService.findUserByName("Vasya"), roomForMessagesService.findById(6L));
+      messagesService.createMessage("lalala tralalajhsdf dfskb", userAccountService.findUserByName("Evgeny"), roomForMessagesService.findById(5L));
+      messagesService.createMessage("lalala tralalaHGKJ jKHFGH", userAccountService.findUserByName("Evgeny"), roomForMessagesService.findById(5L));
+      messagesService.createMessage("KJGHJKL lalala tralala", userAccountService.findUserByName("Evgeny"), roomForMessagesService.findById(5L));
+      messagesService.createMessage("lalala kjHLKJGOl kljgh tralala", userAccountService.findUserByName("Evgeny"), roomForMessagesService.findById(5L));
+      messagesService.createMessage("lalala 66666 tralala 555555", userAccountService.findUserByName("Evgeny"), roomForMessagesService.findById(5L));
     }
 
-    // найчиться делать раздельный вывод по катагориям
+    messagesService.printAllMessagesFromRoom(5L);
+
+    // научиться делать раздельный вывод по катагориям
     // создать сервлеты
     // создать формы для постинга сообщений
-    //аутентификация и регистрация сдлеать
+    // аутентификация и регистрация сделать
     // валидация форм
 
   }

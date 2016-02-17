@@ -12,7 +12,7 @@ public class UserAccountDaoImpl extends GenericDaoImpl<UserAccount> implements U
 
   @Override
   public UserAccount loadUserByUserName(String username) {
-    Query query = this.entityManager.createQuery("select u FROM UserAccount u where u.username= :username");
+    Query query = this.entityManager.createQuery("select u from UserAccount u where u.username= :username");
     query.setParameter("username", username);
     List<UserAccount> userAccounts = query.getResultList();
     if (userAccounts != null) {

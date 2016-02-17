@@ -1,12 +1,10 @@
 package com.devcore.dao;
 
-import java.util.List;
 
 /**
  *
  */
 public interface GenericDao<T> {
-  long countAll();
 
   T create(T t);
 
@@ -15,6 +13,4 @@ public interface GenericDao<T> {
   T find(Object id);
 
   T update(T t);
-
-  List<T> getAll();
 }

@@ -24,20 +24,6 @@ public class UserAccountServiceImpl implements UserAccountService {
   }
 
   @Override
-  public void getUsers() {
-    List<UserAccount> userAccounts = userAccountDao.getAll();
-    for (UserAccount item : userAccounts) {
-      System.out.println(
-        item.getId() +
-          " | " + item.getCreateDate() +
-          " | " + item.getUsername() +
-          " | " + item.getPassword() +
-          " | " + item.getPhone() +
-          " | " + item.getEmail());
-    }
-  }
-
-  @Override
   public UserAccount findUserByName(String name) {
     return userAccountDao.loadUserByUserName(name);
   }
