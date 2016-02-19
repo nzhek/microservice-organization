@@ -7,9 +7,9 @@ import org.springframework.transaction.annotation.Transactional;
 /**
  * Сервис для комнат сообщений
  */
-@Transactional
 public interface RoomForMessagesService {
 
+  @Transactional
   void createRoom(String caption, String description, UserAccount userAccount);
 
   RoomForMessages findById(Long id);

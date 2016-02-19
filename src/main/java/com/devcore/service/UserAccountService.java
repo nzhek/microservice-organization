@@ -3,7 +3,6 @@ package com.devcore.service;
 import com.devcore.entity.UserAccount;
 import org.springframework.transaction.annotation.Transactional;
 
-@Transactional
 public interface UserAccountService {
 
   void createUser(String username, String password);

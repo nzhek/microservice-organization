@@ -10,9 +10,9 @@ import java.util.List;
 /**
  * Сервис для сообщений
  */
-@Transactional
 public interface MessagesService {
 
+  @Transactional
   void createMessage(String text, UserAccount userAccount, RoomForMessages roomForMessages);
 
   List<Messages> printAllMessagesFromRoom(Long id);

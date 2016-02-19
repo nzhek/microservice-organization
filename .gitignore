@@ -8,7 +8,7 @@ target
 .idea
 .gradle
 gradle/*
-gradlew*
+gradle.properties
 version.properties
 build
 classes

@@ -1,12 +1,10 @@
 package com.devcore;
 
-import com.devcore.entity.Messages;
 import com.devcore.service.MessagesService;
 import com.devcore.service.RoomForMessagesService;
 import com.devcore.service.UserAccountService;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import java.util.List;
 
 /**
  * Точка входа
@@ -14,7 +12,7 @@ import java.util.List;
 public class Main {
 
   public static void main(String[] args) {
-    ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("spring.xml");
+    ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
     //context.refresh();
     UserAccountService userAccountService = (UserAccountService) context.getBean("userAccountService");
     userAccountService.createUser("Evgeny", "555ajsgjdsafHJGsd");
