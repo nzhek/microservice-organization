@@ -1,4 +1,4 @@
-group 'site-shop'
+group 'site-shop-collection'
 version '1.0-SNAPSHOT'
 
 apply plugin: 'groovy'
