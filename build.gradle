@@ -1,4 +1,4 @@
-group 'site-devcore'
+group 'site-shop'
 version '1.0-SNAPSHOT'
 
 apply plugin: 'groovy'
