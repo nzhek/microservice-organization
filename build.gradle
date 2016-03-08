@@ -3,23 +3,12 @@ version '1.0-SNAPSHOT'
 
 apply plugin: 'groovy'
 apply plugin: 'java'
-apply plugin: "org.akhikhl.gretty"
 
 sourceCompatibility = 1.8
 repositories {
     mavenCentral()
 }
 
-buildscript {
-    repositories {
-        maven {
-            url "https://plugins.gradle.org/m2/"
-        }
-    }
-    dependencies {
-        classpath "org.akhikhl.gretty:gretty:1.2.4"
-    }
-}
 
 dependencies {
     compile 'org.apache.commons:commons-collections4:4.0'
@@ -31,7 +20,6 @@ dependencies {
     compile 'org.codehaus.groovy:groovy-all:2.3.11'
     compile 'org.springframework:spring-context:4.2.4.RELEASE'
     compile 'org.springframework:spring-orm:4.2.4.RELEASE'
-    compile group: 'org.springframework', name: 'spring-webmvc', version: '4.2.2.RELEASE'
     compile 'org.apache.commons:commons-lang3:3.0'
     compile 'javax.el:el-api:2.2'
     testCompile group: 'junit', name: 'junit', version: '4.11'
