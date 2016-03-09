@@ -9,6 +9,7 @@ target
 .gradle
 gradle/*
 gradle.properties
+gradlew
 version.properties
 build
 classes
