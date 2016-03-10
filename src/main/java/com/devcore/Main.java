@@ -14,7 +14,7 @@ public class Main {
   public static void main(String[] args) {
     ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
     //context.refresh();
-    UserAccountService userAccountService = (UserAccountService) context.getBean("userAccountService");
+   /*UserAccountService userAccountService = (UserAccountService) context.getBean("userAccountService");
     userAccountService.createUser("Evgeny", "555ajsgjdsafHJGsd");
     userAccountService.createUser("Vasya", "ajsgjdsafHJGsd");
     userAccountService.createUser("Boris", "ajsgjdkjgJGsd");
@@ -38,7 +38,7 @@ public class Main {
       messagesService.createMessage("lalala 66666 tralala 555555", userAccountService.findUserByName("Evgeny"), roomForMessagesService.findById(5L));
     }
 
-    messagesService.printAllMessagesFromRoom(5L);
+    messagesService.printAllMessagesFromRoom(5L);*/
 
     // научиться делать раздельный вывод по катагориям
     // создать сервлеты

@@ -2,48 +2,50 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:context="http://www.springframework.org/schema/context"
-       xmlns:tx="http://www.springframework.org/schema/tx" xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:p="http://www.springframework.org/schema/p"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
          http://www.springframework.org/schema/beans/spring-beans.xsd
          http://www.springframework.org/schema/context
          http://www.springframework.org/schema/context/spring-context.xsd
          http://www.springframework.org/schema/tx
-         http://www.springframework.org/schema/tx/spring-tx.xsd" >
+         http://www.springframework.org/schema/tx/spring-tx.xsd"
+        >
 
-  <context:property-placeholder location="classpath:database.properties"/>
-  <context:annotation-config/>
+    <context:property-placeholder location="classpath:database.properties"/>
+    <context:annotation-config/>
 
-  <context:component-scan base-package="com.devcore.entity"/>
-  <context:component-scan base-package="com.devcore.dao"/>
-  <context:component-scan base-package="com.devcore.service"/>
+    <context:component-scan base-package="com.devcore.entity"/>
+    <context:component-scan base-package="com.devcore.dao"/>
+    <context:component-scan base-package="com.devcore.service"/>
 
-  <bean class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor"/>
+    <bean class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor"/>
 
-  <tx:annotation-driven transaction-manager="transactionManager"/>
+    <tx:annotation-driven transaction-manager="transactionManager"/>
 
-  <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager"
-        p:entityManagerFactory-ref="entityManagerFactory"
-        p:dataSource-ref="dataSource"
-  />
+    <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager"
+          p:entityManagerFactory-ref="entityManagerFactory"
+          p:dataSource-ref="dataSource"
+            />
 
-  <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean"
-        p:persistenceXmlLocation="classpath:persistence.xml"
-        p:persistenceUnitName="firstPersistenceUnit"
-        p:packagesToScan="com.devcore.entity"
-        p:dataSource-ref="dataSource"
-        p:jpaVendorAdapter-ref="jpaVendorAdapter"
-  />
+    <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean"
+          p:persistenceXmlLocation="classpath:persistence.xml"
+          p:persistenceUnitName="firstPersistenceUnit"
+          p:packagesToScan="com.devcore.entity"
+          p:dataSource-ref="dataSource"
+          p:jpaVendorAdapter-ref="jpaVendorAdapter"
+            />
 
-  <bean id="jpaVendorAdapter" class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter"/>
+    <bean id="jpaVendorAdapter" class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter"/>
 
-  <bean id="sessionFactory" class="org.springframework.orm.hibernate5.LocalSessionFactoryBean"
-        p:packagesToScan="com.devcore.entity"
-        p:dataSource-ref="dataSource"/>
+    <bean id="sessionFactory" class="org.springframework.orm.hibernate5.LocalSessionFactoryBean"
+          p:packagesToScan="com.devcore.entity"
+          p:dataSource-ref="dataSource"/>
 
-  <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-    <property name="driverClassName" value="${database.driver}"/>
-    <property name="url" value="${database.url}"/>
-    <property name="username" value="${database.username}"/>
-    <property name="password" value="${database.password}"/>
-  </bean>
+    <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName" value="${database.driver}"/>
+        <property name="url" value="${database.url}"/>
+        <property name="username" value="${database.username}"/>
+        <property name="password" value="${database.password}"/>
+    </bean>
 </beans>
