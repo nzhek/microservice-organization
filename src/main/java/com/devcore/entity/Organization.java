@@ -1,5 +1,8 @@
 package com.devcore.entity;
 
+import org.hibernate.search.annotations.*;
+import org.hibernate.search.annotations.Index;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Collection;
@@ -9,13 +12,18 @@ import java.util.Date;
  * Сущность для организаций
  */
 @Entity
+@Indexed
 public class Organization implements Serializable {
 
     @Id
+    @DocumentId
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
+    @Field(index = Index.YES, analyze = Analyze.NO, store = Store.NO)
     private String name;
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @Field(index = Index.YES, analyze = Analyze.NO, store = Store.NO)
+    private String description;
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Collection<Category> category;
     private Date createDate;
 
@@ -33,6 +41,14 @@ public class Organization implements Serializable {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public Collection<Category> getCategory() {

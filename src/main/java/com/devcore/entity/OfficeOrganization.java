@@ -1,5 +1,8 @@
 package com.devcore.entity;
 
+import org.hibernate.search.annotations.*;
+import org.hibernate.search.annotations.Index;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
@@ -8,12 +11,16 @@ import java.util.Date;
  * Сущность для офиса
  */
 @Entity
+@Indexed
 public class OfficeOrganization implements Serializable {
 
     @Id
+    @DocumentId
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
+    @Field(index = Index.YES, analyze = Analyze.NO, store = Store.NO)
     private String name;
+    @Field(index = Index.YES, analyze = Analyze.NO, store = Store.NO)
     private String text;
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private AddressOrganization addressOrganization;

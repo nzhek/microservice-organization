@@ -12,7 +12,7 @@ public interface GenericDao<T> {
   T create(T t);
 
   @Transactional
-  void delete(Object id);
+  void delete(T id);
 
   T find(Object id);
 
