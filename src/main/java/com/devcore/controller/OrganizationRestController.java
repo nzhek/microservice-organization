@@ -1,6 +1,6 @@
 package com.devcore.controller;
 
-import com.devcore.entity.Organization;
+import com.devcore.dto.OrganizationDto;
 import com.devcore.service.OrganizationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -27,7 +27,7 @@ public class OrganizationRestController {
      */
     @RequestMapping(value = "/create", method = RequestMethod.POST)
     @ResponseBody
-    public Organization create(@RequestBody Organization organization) {
+    public OrganizationDto create(@RequestBody OrganizationDto organization) {
         return organizationService.create(organization);
     }
 
@@ -38,7 +38,7 @@ public class OrganizationRestController {
      */
     @RequestMapping(value = "/delete", method = RequestMethod.POST)
     @ResponseBody
-    public Boolean delete(@RequestBody Organization organization) {
+    public Boolean delete(@RequestBody OrganizationDto organization) {
         if (organization == null) return null;
         return organizationService.delete(organization);
     }
@@ -50,7 +50,7 @@ public class OrganizationRestController {
      * @return
      */
     @RequestMapping(value = "/update", method = RequestMethod.POST)
-    public Organization update(Organization organization) {
+    public OrganizationDto update(OrganizationDto organization) {
         return organizationService.update(organization);
     }
 
@@ -62,7 +62,7 @@ public class OrganizationRestController {
      */
     @RequestMapping(value = "/find", method = RequestMethod.GET)
     @ResponseBody
-    public Organization find(Organization organization) {
+    public OrganizationDto find(OrganizationDto organization) {
         return organizationService.find(organization);
     }
 
@@ -77,7 +77,7 @@ public class OrganizationRestController {
     @RequestMapping(value = "/findAll", method = RequestMethod.GET)
     public
     @ResponseBody
-    List<Organization> findAll(
+    List<OrganizationDto> findAll(
             @RequestParam(defaultValue = "") String paramName,
             @RequestParam(defaultValue = "0", required = false) int firstResult,
             @RequestParam(defaultValue = "10", required = false) int maxResult) {

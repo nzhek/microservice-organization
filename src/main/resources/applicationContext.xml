@@ -28,6 +28,8 @@
           p:dataSource-ref="dataSource"
             />
 
+    <bean id="modelMapper" class="org.modelmapper.ModelMapper"/>
+
     <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean"
           p:persistenceXmlLocation="classpath:persistence.xml"
           p:persistenceUnitName="firstPersistenceUnit"

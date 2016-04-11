@@ -1,19 +1,19 @@
 package com.devcore.service;
 
-import com.devcore.entity.Organization;
+import com.devcore.dto.OrganizationDto;
 
 import java.util.List;
 
 public interface OrganizationService {
-    Organization create(Organization organization);
+    OrganizationDto create(OrganizationDto organization);
 
-    Boolean delete(Organization id);
+    Boolean delete(OrganizationDto id);
 
-    Organization update(Organization organization);
+    OrganizationDto update(OrganizationDto organization);
 
-    Organization find(Organization organization);
+    OrganizationDto find(OrganizationDto organization);
 
-    List<Organization> findAll(String paramName, int firstResult, int maxResult);
+    List<OrganizationDto> findAll(String paramName, int firstResult, int maxResult);
 
     Long countPagesByName(String paramName);
 }

@@ -2,10 +2,8 @@ package com.devcore.dao;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import java.io.Serializable;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
-import java.util.List;
 
 public abstract class GenericDaoImpl<T> implements GenericDao<T> {
 
