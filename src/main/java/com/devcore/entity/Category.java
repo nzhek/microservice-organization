@@ -1,31 +1,19 @@
 package com.devcore.entity;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.util.Date;
 
 /**
  * Entity for category
  */
 @Entity
-public class Category implements Serializable {
+public class Category extends BaseEntity {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private Long id;
     private String name;
     private String description;
     @OneToOne
     private Category category;
     private Date createDate;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public String getName() {
         return name;

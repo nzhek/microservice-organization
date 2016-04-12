@@ -2,22 +2,15 @@ package com.devcore.entity;
 
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import java.io.Serializable;
 import java.util.Date;
 
 /**
  * Сущность для Сообщений
  */
 @Entity
-public class Messages implements Serializable {
+public class Messages extends BaseEntity {
 
-  @Id
-  @GeneratedValue(strategy = GenerationType.SEQUENCE)
-  private Long id;
   private String message;
   private Date createDate;
 
@@ -25,14 +18,6 @@ public class Messages implements Serializable {
   private UserAccount userAccount;
   @ManyToOne
   private RoomForMessages roomForMessages;
-
-  public Long getId() {
-    return id;
-  }
-
-  public void setId(Long id) {
-    this.id = id;
-  }
 
   public String getMessage() {
     return message;

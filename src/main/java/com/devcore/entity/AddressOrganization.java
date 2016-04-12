@@ -1,7 +1,6 @@
 package com.devcore.entity;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 
@@ -9,24 +8,13 @@ import java.util.Date;
  * Entity for address organization
  */
 @Entity
-public class AddressOrganization implements Serializable {
+public class AddressOrganization extends BaseEntity {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private Long id;
     private BigDecimal latitude;
     private BigDecimal longitude;
     private Long zoom;
     private String text;
     private Date createDate;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public BigDecimal getLatitude() {
         return latitude;

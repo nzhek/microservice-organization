@@ -1,32 +1,20 @@
 package com.devcore.entity;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.util.Date;
 
 /**
  * Entity for video
  */
 @Entity
-public class Video implements Serializable {
+public class Video extends BaseEntity {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private Long id;
     private String name;
     private String text;
     private String link;
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Organization organization;
     private Date createDate;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public String getName() {
         return name;

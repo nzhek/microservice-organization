@@ -1,65 +1,50 @@
 package com.devcore.entity;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import java.io.Serializable;
 import java.util.Date;
 
 /**
  * Комната для сообщений
  */
 @Entity
-public class RoomForMessages implements Serializable {
+public class RoomForMessages extends BaseEntity {
 
-  @Id
-  @GeneratedValue(strategy = GenerationType.SEQUENCE)
-  private Long id;
-  private String caption;
-  private String description;
-  private Date createDate;
-  @ManyToOne
-  private UserAccount userAccount;
+    private String caption;
+    private String description;
+    private Date createDate;
+    @ManyToOne
+    private UserAccount userAccount;
 
-  public Long getId() {
-    return id;
-  }
+    public String getCaption() {
+        return caption;
+    }
 
-  public void setId(Long id) {
-    this.id = id;
-  }
+    public void setCaption(String caption) {
+        this.caption = caption;
+    }
 
-  public String getCaption() {
-    return caption;
-  }
+    public String getDescription() {
+        return description;
+    }
 
-  public void setCaption(String caption) {
-    this.caption = caption;
-  }
+    public void setDescription(String description) {
+        this.description = description;
+    }
 
-  public String getDescription() {
-    return description;
-  }
+    public Date getCreateDate() {
+        return createDate;
+    }
 
-  public void setDescription(String description) {
-    this.description = description;
-  }
+    public void setCreateDate(Date createDate) {
+        this.createDate = createDate;
+    }
 
-  public Date getCreateDate() {
-    return createDate;
-  }
+    public UserAccount getUserAccount() {
+        return userAccount;
+    }
 
-  public void setCreateDate(Date createDate) {
-    this.createDate = createDate;
-  }
-
-  public UserAccount getUserAccount() {
-    return userAccount;
-  }
-
-  public void setUserAccount(UserAccount userAccount) {
-    this.userAccount = userAccount;
-  }
+    public void setUserAccount(UserAccount userAccount) {
+        this.userAccount = userAccount;
+    }
 }

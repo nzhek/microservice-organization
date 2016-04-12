@@ -1,31 +1,19 @@
 package com.devcore.entity;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.util.Date;
 
 /**
  * Entity for news
  */
 @Entity
-public class News implements Serializable {
+public class News extends BaseEntity {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private Long id;
     private String name;
     private String text;
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Organization organization;
     private Date createDate;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public String getName() {
         return name;
