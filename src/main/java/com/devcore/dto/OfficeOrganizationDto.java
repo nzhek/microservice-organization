@@ -1,30 +1,28 @@
-package com.devcore.entity;
+package com.devcore.dto;
 
-import org.hibernate.search.annotations.*;
-import org.hibernate.search.annotations.Index;
+import com.devcore.entity.Email;
+import com.devcore.entity.Phone;
 
-import javax.persistence.*;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.TimeZone;
 
 /**
- * Сущность для офиса
+ * Dto - office organization
+ * Created by e.novichenko on 11.04.2016.
  */
-@Entity
-@Indexed
-public class OfficeOrganization extends BaseEntity {
+public class OfficeOrganizationDto extends BaseDto {
 
-    @Field(index = Index.YES, analyze = Analyze.NO, store = Store.NO)
+    private static final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+
     private String officeName;
-    @Field(index = Index.YES, analyze = Analyze.NO, store = Store.NO)
     private String description;
-    @Field(index = Index.YES, analyze = Analyze.NO, store = Store.NO)
     private String addressOrganization;
-    @OneToMany(cascade = CascadeType.ALL)
     private List<Phone> phone;
-    @OneToMany(cascade = CascadeType.ALL)
     private List<Email> email;
-    private Date createDate;
+    private String createDate;
 
     public String getOfficeName() {
         return officeName;
@@ -66,11 +64,22 @@ public class OfficeOrganization extends BaseEntity {
         this.email = email;
     }
 
-    public Date getCreateDate() {
+    public String getCreateDate() {
         return createDate;
     }
 
-    public void setCreateDate(Date createDate) {
+    public void setCreateDate(String createDate) {
         this.createDate = createDate;
     }
+
+    public Date getSubmissionDateConverted(String timezone) throws ParseException {
+        dateFormat.setTimeZone(TimeZone.getTimeZone(timezone));
+        return dateFormat.parse(getCreateDate());
+    }
+
+    public void setSubmissionDate(Date date, String timezone) {
+        dateFormat.setTimeZone(TimeZone.getTimeZone(timezone));
+        setCreateDate(dateFormat.format(date));
+    }
+
 }

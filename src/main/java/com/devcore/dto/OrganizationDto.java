@@ -10,30 +10,21 @@ import java.util.TimeZone;
  * Dto layer for organization
  * Created by e.novichenko
  */
-public class OrganizationDto {
+public class OrganizationDto extends BaseDto {
 
     private static final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 
-    private Long id;
-    private String name;
+    private String organizationName;
     private String description;
     private String date;
     private Collection<CategoryDto> category;
 
-    public Long getId() {
-        return id;
+    public String getOrganizationName() {
+        return organizationName;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
+    public void setOrganizationName(String organizationName) {
+        this.organizationName = organizationName;
     }
 
     public String getDescription() {

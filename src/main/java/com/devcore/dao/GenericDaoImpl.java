@@ -4,6 +4,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
+import java.util.List;
 
 public abstract class GenericDaoImpl<T> implements GenericDao<T> {
 
@@ -22,6 +23,13 @@ public abstract class GenericDaoImpl<T> implements GenericDao<T> {
     public T create(T t) {
         if (t == null) return null;
         entityManager.persist(t);
+        entityManager.flush();
+        return t;
+    }
+
+    @Override
+    public List<T> create(List<T> t) {
+        t.stream().forEach(o -> entityManager.persist(o));
         entityManager.flush();
         return t;
     }

@@ -1,6 +1,8 @@
 package com.devcore.controller;
 
+import com.devcore.dto.OfficeOrganizationDto;
 import com.devcore.dto.OrganizationDto;
+import com.devcore.service.OfficeOrganizationService;
 import com.devcore.service.OrganizationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -18,6 +20,10 @@ public class OrganizationRestController {
     @Autowired
     @Qualifier(value = "organizationService")
     private OrganizationService organizationService;
+
+    @Autowired
+    @Qualifier(value = "officeOrganizationService")
+    private OfficeOrganizationService officeOrganizationService;
 
     /**
      * create organization
@@ -87,5 +93,11 @@ public class OrganizationRestController {
     @RequestMapping(value = "/countPagesByName", method = RequestMethod.GET)
     public Long countPagesByName(String paramName) {
         return organizationService.countPagesByName(paramName);
+    }
+
+    @RequestMapping(value = "/createOffice", method = RequestMethod.POST)
+    @ResponseBody
+    public List<OfficeOrganizationDto> createOffice(@RequestBody List<OfficeOrganizationDto> officeOrganizationDto) {
+        return officeOrganizationService.create(officeOrganizationDto);
     }
 }

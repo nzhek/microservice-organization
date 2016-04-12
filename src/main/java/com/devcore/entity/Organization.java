@@ -4,7 +4,6 @@ import org.hibernate.search.annotations.*;
 import org.hibernate.search.annotations.Index;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.util.Collection;
 import java.util.Date;
 
@@ -13,34 +12,24 @@ import java.util.Date;
  */
 @Entity
 @Indexed
-public class Organization implements Serializable {
+public class Organization extends BaseEntity {
 
-    @Id
-    @DocumentId
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private Long id;
     @Field(index = Index.YES, analyze = Analyze.NO, store = Store.NO)
-    private String name;
+    private String organizationName;
     @Field(index = Index.YES, analyze = Analyze.NO, store = Store.NO)
     private String description;
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Collection<Category> category;
+    @OneToMany
+    private Collection<OfficeOrganization> officeOrganizations;
     private Date createDate;
 
-    public Long getId() {
-        return id;
+    public String getOrganizationName() {
+        return organizationName;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
+    public void setOrganizationName(String organizationName) {
+        this.organizationName = organizationName;
     }
 
     public String getDescription() {
@@ -57,6 +46,14 @@ public class Organization implements Serializable {
 
     public void setCategory(Collection<Category> category) {
         this.category = category;
+    }
+
+    public Collection<OfficeOrganization> getOfficeOrganizations() {
+        return officeOrganizations;
+    }
+
+    public void setOfficeOrganizations(Collection<OfficeOrganization> officeOrganizations) {
+        this.officeOrganizations = officeOrganizations;
     }
 
     public Date getCreateDate() {

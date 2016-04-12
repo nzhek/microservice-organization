@@ -18,7 +18,7 @@ public class OrganizationDaoImpl extends GenericDaoImpl<Organization> implements
             query = this.entityManager.createQuery("select o from Organization o", Organization.class);
             return query.setFirstResult(firstResult).setMaxResults(maxResult).getResultList();
         }
-        query = this.entityManager.createQuery("select o from Organization o where name like :paramName", Organization.class);
+        query = this.entityManager.createQuery("select o from Organization o where organizationName like :paramName", Organization.class);
         query.setParameter("paramName", paramName);
         return query.setFirstResult(firstResult).setMaxResults(maxResult).getResultList();
     }
@@ -31,7 +31,7 @@ public class OrganizationDaoImpl extends GenericDaoImpl<Organization> implements
 
     @Override
     public Long countPagesByName(String paramName) {
-        Query query = this.entityManager.createQuery("select count(o) from Organization o where name like :paramName");
+        Query query = this.entityManager.createQuery("select count(o) from Organization o where organizationName like :paramName");
         return (Long) query.setParameter("paramName", paramName).getSingleResult();
     }
 }
