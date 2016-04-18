@@ -9,23 +9,14 @@ import java.util.TimeZone;
  * Dto - category layer
  * Created by e.novichenko on 11.04.2016.
  */
-public class CategoryDto {
+public class CategoryDto extends BaseDto {
 
     private static final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 
-    private Long id;
     private String name;
     private String description;
     private CategoryDto category;
     private String createDate;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public String getName() {
         return name;

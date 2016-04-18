@@ -1,13 +1,7 @@
 package com.devcore.dto;
 
-import com.devcore.entity.Email;
-import com.devcore.entity.Phone;
-
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
-import java.util.TimeZone;
 
 /**
  * Dto - office organization
@@ -15,14 +9,12 @@ import java.util.TimeZone;
  */
 public class OfficeOrganizationDto extends BaseDto {
 
-    private static final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-
     private String officeName;
     private String description;
     private String addressOrganization;
-    private List<Phone> phone;
-    private List<Email> email;
-    private String createDate;
+    private List<PhoneDto> phone;
+    private List<EmailDto> email;
+    private Date createDate;
 
     public String getOfficeName() {
         return officeName;
@@ -48,38 +40,27 @@ public class OfficeOrganizationDto extends BaseDto {
         this.addressOrganization = addressOrganization;
     }
 
-    public List<Phone> getPhone() {
+    public List<PhoneDto> getPhone() {
         return phone;
     }
 
-    public void setPhone(List<Phone> phone) {
+    public void setPhone(List<PhoneDto> phone) {
         this.phone = phone;
     }
 
-    public List<Email> getEmail() {
+    public List<EmailDto> getEmail() {
         return email;
     }
 
-    public void setEmail(List<Email> email) {
+    public void setEmail(List<EmailDto> email) {
         this.email = email;
     }
 
-    public String getCreateDate() {
+    public Date getCreateDate() {
         return createDate;
     }
 
-    public void setCreateDate(String createDate) {
+    public void setCreateDate(Date createDate) {
         this.createDate = createDate;
     }
-
-    public Date getSubmissionDateConverted(String timezone) throws ParseException {
-        dateFormat.setTimeZone(TimeZone.getTimeZone(timezone));
-        return dateFormat.parse(getCreateDate());
-    }
-
-    public void setSubmissionDate(Date date, String timezone) {
-        dateFormat.setTimeZone(TimeZone.getTimeZone(timezone));
-        setCreateDate(dateFormat.format(date));
-    }
-
 }

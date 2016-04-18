@@ -1,10 +1,7 @@
 package com.devcore.dto;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Collection;
 import java.util.Date;
-import java.util.TimeZone;
 
 /**
  * Dto layer for organization
@@ -12,12 +9,11 @@ import java.util.TimeZone;
  */
 public class OrganizationDto extends BaseDto {
 
-    private static final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-
     private String organizationName;
     private String description;
-    private String date;
     private Collection<CategoryDto> category;
+    private Collection<OfficeOrganizationDto> officeOrganizations;
+    private Date createDate;
 
     public String getOrganizationName() {
         return organizationName;
@@ -35,14 +31,6 @@ public class OrganizationDto extends BaseDto {
         this.description = description;
     }
 
-    public String getDate() {
-        return date;
-    }
-
-    public void setDate(String date) {
-        this.date = date;
-    }
-
     public Collection<CategoryDto> getCategory() {
         return category;
     }
@@ -51,14 +39,19 @@ public class OrganizationDto extends BaseDto {
         this.category = category;
     }
 
-    public Date getSubmissionDateConverted(String timezone) throws ParseException {
-        dateFormat.setTimeZone(TimeZone.getTimeZone(timezone));
-        return dateFormat.parse(getDate());
+    public Collection<OfficeOrganizationDto> getOfficeOrganizations() {
+        return officeOrganizations;
     }
 
-    public void setSubmissionDate(Date date, String timezone) {
-        dateFormat.setTimeZone(TimeZone.getTimeZone(timezone));
-        setDate(dateFormat.format(date));
+    public void setOfficeOrganizations(Collection<OfficeOrganizationDto> officeOrganizations) {
+        this.officeOrganizations = officeOrganizations;
     }
 
+    public Date getCreateDate() {
+        return createDate;
+    }
+
+    public void setCreateDate(Date createDate) {
+        this.createDate = createDate;
+    }
 }
