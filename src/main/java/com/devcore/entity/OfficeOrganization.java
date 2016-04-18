@@ -20,9 +20,9 @@ public class OfficeOrganization extends BaseEntity {
     private String description;
     @Field(index = Index.YES, analyze = Analyze.NO, store = Store.NO)
     private String addressOrganization;
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<Phone> phone;
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<Email> email;
     private Date createDate;
 

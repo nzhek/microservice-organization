@@ -11,7 +11,7 @@ public class Category extends BaseEntity {
 
     private String name;
     private String description;
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Category category;
     private Date createDate;
 

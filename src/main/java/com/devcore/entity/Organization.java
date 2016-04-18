@@ -18,9 +18,9 @@ public class Organization extends BaseEntity {
     private String organizationName;
     @Field(index = Index.YES, analyze = Analyze.NO, store = Store.NO)
     private String description;
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Collection<Category> category;
-    @OneToMany
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Collection<OfficeOrganization> officeOrganizations;
     private Date createDate;
 
