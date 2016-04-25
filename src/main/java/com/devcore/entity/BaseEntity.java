@@ -7,6 +7,7 @@ import org.hibernate.search.annotations.DocumentId;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.UUID;
 
 /**
  * Base entity
@@ -16,16 +17,16 @@ public abstract class BaseEntity implements Serializable {
 
     @Id
     @DocumentId
-    @GeneratedValue(generator = "system-uuid")
-    @GenericGenerator(name = "system-uuid", strategy = "uuid")
-    private String id;
+    @GeneratedValue(generator = "uuid2")
+    @GenericGenerator(name = "uuid2", strategy = "uuid2")
+    private UUID uuid;
 
-    public String getId() {
-        return id;
+    public UUID getUuid() {
+        return uuid;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setUuid(UUID uuid) {
+        this.uuid = uuid;
     }
 
     @Override
@@ -37,14 +38,14 @@ public abstract class BaseEntity implements Serializable {
         BaseEntity that = (BaseEntity) o;
 
         return new EqualsBuilder()
-                .append(getId(), that.getId())
+                .append(getUuid(), that.getUuid())
                 .isEquals();
     }
 
     @Override
     public int hashCode() {
         return new HashCodeBuilder(17, 37)
-                .append(getId())
+                .append(getUuid())
                 .toHashCode();
     }
 

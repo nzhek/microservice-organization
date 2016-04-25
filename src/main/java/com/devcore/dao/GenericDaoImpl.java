@@ -1,15 +1,22 @@
 package com.devcore.dao;
 
+import org.hibernate.search.jpa.FullTextEntityManager;
+import org.hibernate.search.jpa.Search;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.PersistenceContextType;
+import java.io.Serializable;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.List;
 
 public abstract class GenericDaoImpl<T> implements GenericDao<T> {
 
-    @PersistenceContext
+    @PersistenceContext(type = PersistenceContextType.EXTENDED, name = "firstPersistenceUnit")
     protected EntityManager entityManager;
+
+    private FullTextEntityManager fullTextEntityManager;
 
     private final Class<T> type;
 
@@ -40,13 +47,29 @@ public abstract class GenericDaoImpl<T> implements GenericDao<T> {
     }
 
     @Override
-    public T find(Object id) {
-        return entityManager.find(type, id);
+    public T find(Serializable uuid) {
+        return entityManager.find(type, uuid);
     }
 
     @Override
     public T update(T t) {
         return entityManager.merge(t);
+    }
+
+    @Override
+    public void updateFullTextIndex() {
+        try {
+            getFullTextEntityManager().createIndexer().startAndWait();
+        } catch (Exception e) {
+
+        }
+    }
+
+    protected FullTextEntityManager getFullTextEntityManager() {
+        if (fullTextEntityManager == null) {
+            fullTextEntityManager = Search.getFullTextEntityManager(entityManager);
+        }
+        return fullTextEntityManager;
     }
 
 }

@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
-import java.util.List;
 
 @Service("userAccountService")
 public class UserAccountServiceImpl implements UserAccountService {
@@ -29,7 +28,7 @@ public class UserAccountServiceImpl implements UserAccountService {
   }
 
   @Override
-  public UserAccount findById(Long id) {
+  public UserAccount findById(UserAccount id) {
     return userAccountDao.find(id);
   }
 }

@@ -30,13 +30,28 @@
 
     <bean id="modelMapper" class="org.modelmapper.ModelMapper"/>
 
-    <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean"
-          p:persistenceXmlLocation="classpath:persistence.xml"
-          p:persistenceUnitName="firstPersistenceUnit"
-          p:packagesToScan="com.devcore.entity"
-          p:dataSource-ref="dataSource"
-          p:jpaVendorAdapter-ref="jpaVendorAdapter"
-            />
+    <bean id="entityManagerFactory"
+          class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+        <property name="persistenceXmlLocation" value="classpath:persistence.xml"/>
+        <property name="persistenceUnitName" value="firstPersistenceUnit"/>
+        <property name="packagesToScan" value="com.devcore.entity"/>
+        <property name="dataSource" ref="dataSource"/>
+        <property name="jpaVendorAdapter" ref="jpaVendorAdapter"/>
+        <property name="jpaProperties">
+            <props>
+                <prop key="hibernate.enable_lazy_load_no_trans">true</prop>
+            </props>
+        </property>
+        <property name="jpaPropertyMap">
+            <map>
+                <entry key="hibernate.hbm2ddl.auto" value="update" />
+                <entry key="hibernate.format_sql" value="true" />
+                <entry key="hibernate.use_sql_comments" value="false" />
+                <entry key="hibernate.show_sql" value="false" />
+                <entry key="hibernate.search.default.indexBase" value="c:/lucene/indexes/first" />
+            </map>
+        </property>
+    </bean>
 
     <bean id="jpaVendorAdapter" class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter"/>
 

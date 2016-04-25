@@ -1,7 +1,6 @@
 package com.devcore.service;
 
 import com.devcore.entity.UserAccount;
-import org.springframework.transaction.annotation.Transactional;
 
 public interface UserAccountService {
 
@@ -9,5 +8,5 @@ public interface UserAccountService {
 
   UserAccount findUserByName(String name);
 
-  UserAccount findById(Long id);
+  UserAccount findById(UserAccount id);
 }

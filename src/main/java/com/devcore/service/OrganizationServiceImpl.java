@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Service("organizationService")
@@ -20,8 +21,8 @@ public class OrganizationServiceImpl implements OrganizationService {
     private ModelMapper modelMapper;
 
     @Override
-    public OrganizationDto create(OrganizationDto organization) {
-        return convertToDto(organizationDao.create(modelMapper.map(organization, Organization.class)));
+    public OrganizationDto create(Organization organization) {
+        return convertToDto(organizationDao.create(organization));
     }
 
     /**
@@ -42,18 +43,13 @@ public class OrganizationServiceImpl implements OrganizationService {
 
     @Override
     public OrganizationDto find(OrganizationDto organization) {
-        return convertToDto(organizationDao.find(organization));
+        return convertToDto(organizationDao.find(UUID.fromString(organization.getUuid())));
     }
 
     @Override
-    public List<OrganizationDto> findAll(String paramName, int firstResult, int maxResult) {
-        return organizationDao.findAll(paramName, firstResult, maxResult).stream().map(
+    public List<OrganizationDto> search(String paramName, int firstResult, int maxResult) {
+        return organizationDao.search(paramName, firstResult, maxResult).stream().map(
                 organization -> convertToDto(organization)).collect(Collectors.toList());
-    }
-
-    @Override
-    public Long countPagesByName(String paramName) {
-        return organizationDao.countPagesByName(paramName);
     }
 
     private OrganizationDto convertToDto(Organization post) {

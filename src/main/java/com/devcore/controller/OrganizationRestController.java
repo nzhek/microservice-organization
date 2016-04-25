@@ -2,6 +2,8 @@ package com.devcore.controller;
 
 import com.devcore.dto.OfficeOrganizationDto;
 import com.devcore.dto.OrganizationDto;
+import com.devcore.dto.search.SearchDto;
+import com.devcore.entity.Organization;
 import com.devcore.service.OfficeOrganizationService;
 import com.devcore.service.OrganizationService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,7 +35,7 @@ public class OrganizationRestController {
      */
     @RequestMapping(value = "/create", method = RequestMethod.POST)
     @ResponseBody
-    public OrganizationDto create(@RequestBody OrganizationDto organization) {
+    public OrganizationDto create(@RequestBody Organization organization) {
         return organizationService.create(organization);
     }
 
@@ -56,7 +58,7 @@ public class OrganizationRestController {
      * @return
      */
     @RequestMapping(value = "/update", method = RequestMethod.POST)
-    public OrganizationDto update(OrganizationDto organization) {
+    public OrganizationDto update(@RequestBody OrganizationDto organization) {
         return organizationService.update(organization);
     }
 
@@ -66,33 +68,24 @@ public class OrganizationRestController {
      * @param organization
      * @return
      */
-    @RequestMapping(value = "/find", method = RequestMethod.GET)
+    @RequestMapping(value = "/find", method = RequestMethod.POST)
     @ResponseBody
-    public OrganizationDto find(OrganizationDto organization) {
+    public OrganizationDto find(@RequestBody OrganizationDto organization) {
+        if (organization.getUuid()==null) return null;
         return organizationService.find(organization);
     }
 
     /**
-     * find all items from firstResult to maxResult and return list of organization
+     * Поиск по организациям
      *
-     * @param paramName   - find of name organzation
-     * @param firstResult - step from
-     * @param maxResult   - step to
      * @return - list organization
      */
-    @RequestMapping(value = "/findAll", method = RequestMethod.GET)
-    public
+    @RequestMapping(value = "/search", method = RequestMethod.POST)
     @ResponseBody
-    List<OrganizationDto> findAll(
-            @RequestParam(defaultValue = "") String paramName,
-            @RequestParam(defaultValue = "0", required = false) int firstResult,
-            @RequestParam(defaultValue = "10", required = false) int maxResult) {
-        return organizationService.findAll(paramName, firstResult, maxResult);
-    }
-
-    @RequestMapping(value = "/countPagesByName", method = RequestMethod.GET)
-    public Long countPagesByName(String paramName) {
-        return organizationService.countPagesByName(paramName);
+    public List<OrganizationDto> search(@RequestBody SearchDto searchDto) {
+        if ("".equals(searchDto.getSearchText())) return null;
+        return organizationService.search(searchDto.getSearchText(),
+                searchDto.getFirstResult(), searchDto.getMaxResult());
     }
 
     @RequestMapping(value = "/createOffice", method = RequestMethod.POST)

@@ -1,11 +1,12 @@
 package com.devcore.service;
 
 import com.devcore.dto.OrganizationDto;
+import com.devcore.entity.Organization;
 
 import java.util.List;
 
 public interface OrganizationService {
-    OrganizationDto create(OrganizationDto organization);
+    OrganizationDto create(Organization organization);
 
     Boolean delete(OrganizationDto id);
 
@@ -13,7 +14,5 @@ public interface OrganizationService {
 
     OrganizationDto find(OrganizationDto organization);
 
-    List<OrganizationDto> findAll(String paramName, int firstResult, int maxResult);
-
-    Long countPagesByName(String paramName);
+    List<OrganizationDto> search(String paramName, int firstResult, int maxResult);
 }

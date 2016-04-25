@@ -1,5 +1,8 @@
 package com.devcore.entity;
 
+import org.apache.lucene.analysis.core.LowerCaseFilterFactory;
+import org.apache.lucene.analysis.ru.RussianLightStemFilterFactory;
+import org.apache.lucene.analysis.standard.StandardTokenizerFactory;
 import org.hibernate.search.annotations.*;
 import org.hibernate.search.annotations.Index;
 
@@ -12,11 +15,21 @@ import java.util.Date;
  */
 @Entity
 @Indexed
+@AnalyzerDef(
+        name = "customanalyzer",
+        tokenizer = @TokenizerDef(factory = StandardTokenizerFactory.class),
+        filters = {
+                @TokenFilterDef(factory = LowerCaseFilterFactory.class),
+                @TokenFilterDef(factory = RussianLightStemFilterFactory.class),
+        }
+)
 public class Organization extends BaseEntity {
 
-    @Field(index = Index.YES, analyze = Analyze.NO, store = Store.NO)
+    @Field(index = Index.YES, analyze = Analyze.YES, store = Store.NO)
+    @Analyzer(definition = "customanalyzer")
     private String organizationName;
-    @Field(index = Index.YES, analyze = Analyze.NO, store = Store.NO)
+    @Field(index = Index.YES, analyze = Analyze.YES, store = Store.NO)
+    @Analyzer(definition = "customanalyzer")
     private String description;
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Collection<Category> category;

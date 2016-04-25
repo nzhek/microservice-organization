@@ -1,6 +1,8 @@
 package com.devcore.dao;
 
 import com.devcore.entity.Organization;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -9,9 +11,6 @@ import java.util.List;
  */
 public interface OrganizationDao extends GenericDao<Organization> {
 
-    List<Organization> findAll(String paramName, int firstResult, int maxResult);
-
-    Long countPages();
-
-    Long countPagesByName(String paramName);
+    @Transactional(propagation = Propagation.REQUIRES_NEW)
+    List<Organization> search(String searchString, int firstResult, int maxResult);
 }
