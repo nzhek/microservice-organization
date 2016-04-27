@@ -33,7 +33,7 @@ public class Organization extends BaseEntity {
     private String description;
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Collection<Category> category;
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     private Collection<OfficeOrganization> officeOrganizations;
     private Date createDate;
 

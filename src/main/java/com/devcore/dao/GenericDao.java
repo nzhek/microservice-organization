@@ -20,7 +20,10 @@ public interface GenericDao<T> {
     @Transactional
     void delete(T id);
 
-    T find(Serializable id);
+    @Transactional
+    void delete(Serializable uuid);
+
+    T find(Serializable uuid);
 
     @Transactional
     T update(T t);

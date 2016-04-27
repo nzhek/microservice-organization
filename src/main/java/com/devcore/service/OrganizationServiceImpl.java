@@ -21,17 +21,17 @@ public class OrganizationServiceImpl implements OrganizationService {
     private ModelMapper modelMapper;
 
     @Override
-    public OrganizationDto create(Organization organization) {
-        return convertToDto(organizationDao.create(organization));
+    public OrganizationDto create(OrganizationDto organization) {
+        return convertToDto(organizationDao.create(modelMapper.map(organization, Organization.class)));
     }
 
     /**
-     * @param organizationDto
+     * @param uuid
      * @return false if organization not deleted and exists, true is organization deleted
      */
     @Override
-    public Boolean delete(OrganizationDto organizationDto) {
-        organizationDao.delete(modelMapper.map(organizationDto, Organization.class));
+    public Boolean delete(String uuid) {
+        organizationDao.delete(UUID.fromString(uuid));
         //if (organizationDao.find(id) != null){ return false;}
         return true;
     }
@@ -42,14 +42,17 @@ public class OrganizationServiceImpl implements OrganizationService {
     }
 
     @Override
-    public OrganizationDto find(OrganizationDto organization) {
-        return convertToDto(organizationDao.find(UUID.fromString(organization.getUuid())));
+    public OrganizationDto find(String uuid) {
+        return convertToDto(organizationDao.find(UUID.fromString(uuid)));
     }
 
     @Override
     public List<OrganizationDto> search(String paramName, int firstResult, int maxResult) {
-        return organizationDao.search(paramName, firstResult, maxResult).stream().map(
-                organization -> convertToDto(organization)).collect(Collectors.toList());
+        List<Organization> list = organizationDao.search(paramName, firstResult, maxResult);
+        if (list != null)
+            return list.stream().map(
+                    organization -> convertToDto(organization)).collect(Collectors.toList());
+        return null;
     }
 
     private OrganizationDto convertToDto(Organization post) {

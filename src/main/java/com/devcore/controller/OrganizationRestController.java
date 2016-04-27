@@ -3,7 +3,6 @@ package com.devcore.controller;
 import com.devcore.dto.OfficeOrganizationDto;
 import com.devcore.dto.OrganizationDto;
 import com.devcore.dto.search.SearchDto;
-import com.devcore.entity.Organization;
 import com.devcore.service.OfficeOrganizationService;
 import com.devcore.service.OrganizationService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,20 +34,20 @@ public class OrganizationRestController {
      */
     @RequestMapping(value = "/create", method = RequestMethod.POST)
     @ResponseBody
-    public OrganizationDto create(@RequestBody Organization organization) {
+    public OrganizationDto create(@RequestBody OrganizationDto organization) {
         return organizationService.create(organization);
     }
 
     /**
      * delete organization
      *
-     * @param organization - not empty object
+     * @param uuid - not empty param
      */
     @RequestMapping(value = "/delete", method = RequestMethod.POST)
     @ResponseBody
-    public Boolean delete(@RequestBody OrganizationDto organization) {
-        if (organization == null) return null;
-        return organizationService.delete(organization);
+    public Boolean delete(@RequestBody String uuid) {
+        if (uuid == null) return null;
+        return organizationService.delete(uuid);
     }
 
     /**
@@ -65,18 +64,18 @@ public class OrganizationRestController {
     /**
      * find organization by id
      *
-     * @param organization
+     * @param uuid
      * @return
      */
     @RequestMapping(value = "/find", method = RequestMethod.POST)
     @ResponseBody
-    public OrganizationDto find(@RequestBody OrganizationDto organization) {
-        if (organization.getUuid()==null) return null;
-        return organizationService.find(organization);
+    public OrganizationDto find(@RequestParam String uuid) {
+        if (uuid == null) return null;
+        return organizationService.find(uuid);
     }
 
     /**
-     * Поиск по организациям
+     * Поиск по организациям hibernate search
      *
      * @return - list organization
      */

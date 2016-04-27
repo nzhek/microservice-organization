@@ -44,6 +44,13 @@ public abstract class GenericDaoImpl<T> implements GenericDao<T> {
     @Override
     public void delete(T t) {
         entityManager.remove(entityManager.merge(t));
+        entityManager.flush();
+    }
+
+    @Override
+    public void delete(Serializable uuid) {
+        entityManager.remove(entityManager.find(type, uuid));
+        entityManager.flush();
     }
 
     @Override
@@ -53,7 +60,9 @@ public abstract class GenericDaoImpl<T> implements GenericDao<T> {
 
     @Override
     public T update(T t) {
-        return entityManager.merge(t);
+        T result = entityManager.merge(t);
+        entityManager.flush();
+        return result;
     }
 
     @Override

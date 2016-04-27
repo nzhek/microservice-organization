@@ -20,16 +20,22 @@ public class OrganizationDaoImpl extends GenericDaoImpl<Organization> implements
 //
 //        }
 
-        QueryBuilder qb = getFullTextEntityManager().getSearchFactory().buildQueryBuilder().forEntity(Organization.class).get();
+        try {
+            QueryBuilder qb = getFullTextEntityManager().getSearchFactory().buildQueryBuilder().forEntity(Organization.class).get();
+            org.apache.lucene.search.Query luceneQuery = qb.keyword().fuzzy()
+                    .onFields("organizationName", "description").matching(searchString).createQuery();
+            Query fullTextQuery = getFullTextEntityManager().createFullTextQuery(luceneQuery, Organization.class);
+            fullTextQuery.setFirstResult(firstResult);
+            fullTextQuery.setMaxResults(maxResult);
 
-        org.apache.lucene.search.Query luceneQuery = qb.keyword().fuzzy()
-                .onFields("organizationName", "description").matching(searchString).createQuery();
+            List<Organization> list = (List<Organization>) fullTextQuery.getResultList();
+            if (list.isEmpty()) return null;
+            return list;
 
-        Query fullTextQuery = getFullTextEntityManager().createFullTextQuery(luceneQuery, Organization.class);
+        } catch (Exception e) {
+            /*добавить логер*/
+            return null;
+        }
 
-        fullTextQuery.setFirstResult(firstResult);
-        fullTextQuery.setMaxResults(maxResult);
-
-        return (List<Organization>) fullTextQuery.getResultList();
     }
 }
