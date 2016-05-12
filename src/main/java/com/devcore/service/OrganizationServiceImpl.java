@@ -30,8 +30,8 @@ public class OrganizationServiceImpl implements OrganizationService {
      * @return false if organization not deleted and exists, true is organization deleted
      */
     @Override
-    public Boolean delete(String uuid) {
-        organizationDao.delete(UUID.fromString(uuid));
+    public Boolean delete(UUID uuid) {
+        organizationDao.delete(uuid);
         //if (organizationDao.find(id) != null){ return false;}
         return true;
     }
@@ -42,8 +42,8 @@ public class OrganizationServiceImpl implements OrganizationService {
     }
 
     @Override
-    public OrganizationDto find(String uuid) {
-        return convertToDto(organizationDao.find(UUID.fromString(uuid)));
+    public OrganizationDto find(OrganizationDto uuid) {
+        return convertToDto(organizationDao.find(uuid.getUuid()));
     }
 
     @Override
@@ -56,6 +56,7 @@ public class OrganizationServiceImpl implements OrganizationService {
     }
 
     private OrganizationDto convertToDto(Organization post) {
+        if(post== null) return null;
         return modelMapper.map(post, OrganizationDto.class);
     }
 }

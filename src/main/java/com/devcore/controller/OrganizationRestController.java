@@ -41,13 +41,13 @@ public class OrganizationRestController {
     /**
      * delete organization
      *
-     * @param uuid - not empty param
+     * @param organization - not empty param
      */
     @RequestMapping(value = "/delete", method = RequestMethod.POST)
     @ResponseBody
-    public Boolean delete(@RequestBody String uuid) {
-        if (uuid == null) return null;
-        return organizationService.delete(uuid);
+    public Boolean delete(@RequestBody OrganizationDto organization) {
+        if (organization == null) return null;
+        return organizationService.delete(organization.getUuid());
     }
 
     /**
@@ -64,14 +64,14 @@ public class OrganizationRestController {
     /**
      * find organization by id
      *
-     * @param uuid
+     * @param organization
      * @return
      */
     @RequestMapping(value = "/find", method = RequestMethod.POST)
     @ResponseBody
-    public OrganizationDto find(@RequestParam String uuid) {
-        if (uuid == null) return null;
-        return organizationService.find(uuid);
+    public OrganizationDto find(@RequestBody OrganizationDto organization) {
+        if (organization == null) return null;
+        return organizationService.find(organization);
     }
 
     /**
